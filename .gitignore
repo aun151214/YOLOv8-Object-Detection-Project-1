@@ -1,0 +1,11 @@
+
+
+.venv/
+runs/
+runs/
+data/
+*.pt
+*.pt
+*.onnx
+*.onnx
+*.engine

@@ -1,0 +1,7 @@
+# configs/data.yaml
+path: C:/Users/OWN/Documents/CIS/My Projects/YOLOv8 Object Detection Project 1/data/openimages_yolo
+train: images/train
+val: images/val
+
+nc: 6
+names: ['Person', 'Car', 'Bicycle', 'Motorcycle', 'Traffic light', 'Stop sign']
