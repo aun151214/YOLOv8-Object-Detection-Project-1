@@ -1,7 +1,7 @@
-# 🚀 YOLOv8 Object Detection Project (OpenImages Subset)
+# 🚀 YOLOv8 Object Detection Project (Open Images)
 
-This project demonstrates how to build an **end-to-end Object Detection pipeline with YOLOv8**, using a curated subset of the **OpenImages V6 dataset**.  
-The idea is to showcase real, practical deep learning work — dataset prep, training, evaluation, inference, and documentation — in a way that’s easy to reproduce.
+This project implements **YOLOv8** for object detection using a subset of the **Open Images V6 dataset**.  
+It is designed to demonstrate **real-world object detection** (people, vehicles, traffic signs) and to serve as a **portfolio-ready project** for applying to AI/ML jobs.  
 
 ---
 
@@ -9,106 +9,102 @@ The idea is to showcase real, practical deep learning work — dataset prep, tra
 
 YOLOv8-Object-Detection-Project-1/
 │── configs/
-│ └── data.yaml # YOLO dataset config
+│ └── data.yaml # Dataset configuration
 │
 │── data/
-│ └── openimages_yolo/ # Exported YOLO dataset (generated automatically)
+│ └── openimages_yolo/ # Exported YOLO dataset
+│ ├── images/
+│ │ ├── train/
+│ │ └── val/
+│ └── labels/
+│ ├── train/
+│ └── val/
 │
-│── src/
-│ └── prepare_openimages.py # Script to download & prepare dataset
+│── runs/
+│ └── detect/
+│ └── oi_yolov8n/ # Training results (50 epochs)
+│ ├── results.png # Training curve
+│ ├── results.csv # Metrics log
+│ └── weights/
+│ ├── best.pt # Best model weights
+│ └── last.pt # Last epoch weights
 │
 │── samples/
 │ └── test_images/ # Custom images for inference
 │
-│── README.md
-│── requirements.txt
+│── src/
+│ └── prepare_openimages.py # Script to download & prep dataset
+│
 │── .gitignore
+│── requirements.txt
+│── README.md
 
+yaml
+Copy code
 
 ---
 
-## 📊 Dataset
+## 📊 Training Results
 
-- **Source**: [OpenImages V6](https://storage.googleapis.com/openimages/web/index.html)  
-- **Classes chosen**:  
-  - Person, Car, Bicycle, Motorcycle, Traffic light, Stop sign
-- **Samples**:  
-  - 800 training images  
-  - 200 validation images  
+![Training Results](runs/detect/oi_yolov8n/results.png)
 
-Everything is prepared with one command:
+- **mAP50-95**: ~0.14 (on validation set)  
+- **Classes trained**: Person, Car, Bicycle, Motorcycle, Traffic light, Stop sign  
+- Model: `YOLOv8n` (nano, lightweight, CPU-friendly)  
+- Epochs: 50  
+
+---
+
+## 🏋️ Training
+
+Train the model locally or on Google Colab:
 
 ```bash
-python src/prepare_openimages.py
+yolo detect train model=yolov8n.pt data=configs/data.yaml epochs=50 imgsz=640 batch=16 name=oi_yolov8n
+✅ Validation
+Evaluate trained model on validation set:
 
-🏋️ Training
+bash
+Copy code
+yolo detect val model=runs/detect/oi_yolov8n/weights/best.pt data=configs/data.yaml imgsz=640
+🔍 Inference
+Run inference on custom images (placed inside samples/test_images/):
 
-We trained the YOLOv8-nano model (yolov8n) for 50 epochs.
-The smaller model was chosen for speed since we trained on CPU/Colab.
-
-Command used:
-
-yolo detect train model=yolov8n.pt data=configs/data.yaml imgsz=320 epochs=50 batch=16 name=oi_yolov8n
-
-📈 Results
-
-Performance on validation set (200 images, 504 objects):
-
-Class	Precision	Recall	mAP50	mAP50-95
-Person	0.24	0.21	0.10	0.05
-Car	0.53	0.70	0.67	0.49
-Bicycle	1.00	0.00	0.01	0.01
-Motorcycle	1.00	0.00	0.03	0.02
-Overall	0.69	0.23	0.20	0.14
-
-Training curves:
-
-
-🔮 Inference
-
-Run inference on your own images:
-
+bash
+Copy code
 yolo detect predict model=runs/detect/oi_yolov8n/weights/best.pt source=samples/test_images/ save=True
+Results will be saved to:
 
-
-Predicted images are saved automatically under:
-
+bash
+Copy code
 runs/detect/predict/
+📥 Pretrained Weights
+Download pretrained weights from the release section:
 
+Download best.pt (zipped)
 
-Example:
-If you put images in samples/test_images/, the results will appear in runs/detect/predict/.
+Download last.pt (zipped)
 
-📦 Pretrained Weights & Outputs
+Unzip before using:
 
-To avoid bloating the repo, we host model weights and results as a GitHub Release:
+bash
+Copy code
+unzip best.pt.zip
+⚙️ Setup
+Clone repo:
 
-🏋️ Best model weights: Download best.pt
-
-📉 Training curves: Download results.png
-
-⚡ How to Reproduce
-
-Clone this repo:
-
+bash
+Copy code
 git clone https://github.com/aun151214/YOLOv8-Object-Detection-Project-1.git
 cd YOLOv8-Object-Detection-Project-1
+Create & activate virtual env:
 
-
-Create a virtual environment:
-
+bash
+Copy code
 python -m venv .venv
-.venv\Scripts\activate
-
-
+.\.venv\Scripts\activate
 Install dependencies:
 
+bash
+Copy code
 pip install -r requirements.txt
-
-
-Prepare dataset:
-
-python src/prepare_openimages.py
-
-
-Train or run inference 🚀
