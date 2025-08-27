@@ -1,7 +1,7 @@
-# 🚀 YOLOv8 Object Detection on OpenImages
+# 🚀 YOLOv8 Object Detection Project (OpenImages Subset)
 
-This project implements **YOLOv8** for object detection using a subset of the [OpenImages V6 dataset](https://storage.googleapis.com/openimages/web/index.html).  
-The goal is to build an end-to-end pipeline: dataset preparation → training → validation → inference → results visualization.
+This project demonstrates how to build an **end-to-end Object Detection pipeline with YOLOv8**, using a curated subset of the **OpenImages V6 dataset**.  
+The idea is to showcase real, practical deep learning work — dataset prep, training, evaluation, inference, and documentation — in a way that’s easy to reproduce.
 
 ---
 
@@ -12,74 +12,103 @@ YOLOv8-Object-Detection-Project-1/
 │ └── data.yaml # YOLO dataset config
 │
 │── data/
-│ └── openimages_yolo/ # Exported YOLO dataset
-│
-│── runs/ # Training + inference outputs
-│ └── detect/
-│ └── oi_yolov8n/ # 50-epoch training run
-│ ├── results.png # Training curves
-│ ├── results.csv
-│ └── weights/
-│ ├── best.pt
-│ └── last.pt
-│
-│── samples/
-│ └── test_images/ # Example images for inference
+│ └── openimages_yolo/ # Exported YOLO dataset (generated automatically)
 │
 │── src/
-│ └── prepare_openimages.py # Script to download & prep dataset
+│ └── prepare_openimages.py # Script to download & prepare dataset
 │
-│── requirements.txt # Dependencies
-│── README.md # This file
+│── samples/
+│ └── test_images/ # Custom images for inference
+│
+│── README.md
+│── requirements.txt
 │── .gitignore
 
 
 ---
 
-## 📊 Training Results
+## 📊 Dataset
 
-Model trained for **50 epochs** on YOLOv8n.  
+- **Source**: [OpenImages V6](https://storage.googleapis.com/openimages/web/index.html)  
+- **Classes chosen**:  
+  - Person, Car, Bicycle, Motorcycle, Traffic light, Stop sign
+- **Samples**:  
+  - 800 training images  
+  - 200 validation images  
 
-**Training curve:**
-![Training Results](runs/detect/oi_yolov8n/results.png)
+Everything is prepared with one command:
 
-**Validation Metrics (on 200 images):**
-| Metric | Value |
-|--------|-------|
-| Precision | ~0.69 |
-| Recall    | ~0.22 |
-| mAP@0.5   | ~0.20 |
-| mAP@0.5:0.95 | ~0.14 |
-
----
-
-## 🔍 Inference Examples
-
-Example detections on custom test images:  
-(saved in `runs/detect/predict/`)
-
-<p align="center">
-  <img src="runs/detect/predict/example1.jpg" width="45%">
-  <img src="runs/detect/predict/example2.jpg" width="45%">
-</p>
-
----
-
-## ⚙️ How to Run
-
-### 1️⃣ Install dependencies
 ```bash
+python src/prepare_openimages.py
+
+🏋️ Training
+
+We trained the YOLOv8-nano model (yolov8n) for 50 epochs.
+The smaller model was chosen for speed since we trained on CPU/Colab.
+
+Command used:
+
+yolo detect train model=yolov8n.pt data=configs/data.yaml imgsz=320 epochs=50 batch=16 name=oi_yolov8n
+
+📈 Results
+
+Performance on validation set (200 images, 504 objects):
+
+Class	Precision	Recall	mAP50	mAP50-95
+Person	0.24	0.21	0.10	0.05
+Car	0.53	0.70	0.67	0.49
+Bicycle	1.00	0.00	0.01	0.01
+Motorcycle	1.00	0.00	0.03	0.02
+Overall	0.69	0.23	0.20	0.14
+
+Training curves:
+
+
+🔮 Inference
+
+Run inference on your own images:
+
+yolo detect predict model=runs/detect/oi_yolov8n/weights/best.pt source=samples/test_images/ save=True
+
+
+Predicted images are saved automatically under:
+
+runs/detect/predict/
+
+
+Example:
+If you put images in samples/test_images/, the results will appear in runs/detect/predict/.
+
+📦 Pretrained Weights & Outputs
+
+To avoid bloating the repo, we host model weights and results as a GitHub Release:
+
+🏋️ Best model weights: Download best.pt
+
+📉 Training curves: Download results.png
+
+⚡ How to Reproduce
+
+Clone this repo:
+
+git clone https://github.com/aun151214/YOLOv8-Object-Detection-Project-1.git
+cd YOLOv8-Object-Detection-Project-1
+
+
+Create a virtual environment:
+
+python -m venv .venv
+.venv\Scripts\activate
+
+
+Install dependencies:
+
 pip install -r requirements.txt
 
 
-2️⃣ Prepare dataset
+Prepare dataset:
+
 python src/prepare_openimages.py
 
-3️⃣ Train
-yolo detect train model=yolov8n.pt data=configs/data.yaml epochs=50 imgsz=320 batch=8 name=oi_yolov8n
 
-4️⃣ Validate
-yolo detect val model=runs/detect/oi_yolov8n/weights/best.pt data=configs/data.yaml imgsz=320 batch=8
-
-5️⃣ Predict on new images
-yolo detect predict model=runs/detect/oi_yolov8n/weights/best.pt source=samples/test_images/ save=True
+Train or run inference 🚀

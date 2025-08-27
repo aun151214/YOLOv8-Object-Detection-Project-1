@@ -1,11 +1,30 @@
-
-
+# Virtual environment
 .venv/
+env/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# VS Code settings
+.vscode/
+
+# Dataset + cache
+data/openimages_yolo/
+data/openimages_raw_*/
+fiftyone/
+
+# YOLO training outputs
 runs/
-runs/
-data/
-*.pt
-*.pt
-*.onnx
-*.onnx
-*.engine
+
+# Jupyter/IPython
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
