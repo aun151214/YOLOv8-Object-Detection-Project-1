@@ -43,8 +43,21 @@ python src/prepare_openimages.py
 
 🏋️ Training
 
-We trained the YOLOv8-nano model (yolov8n) for 50 epochs.
-The smaller model was chosen for speed since we trained on CPU/Colab.
+1. CPU Run (50 Epochs)
+
+Model: yolov8n
+
+Epochs: 50
+
+Results: [Release: CPU 50 Epochs](https://github.com/aun151214/YOLOv8-Object-Detection-Project-1/releases/tag/v1.0.0)
+
+2. Google Colab Run (10 Epochs, GPU)
+
+Model: yolov8n
+
+Epochs: 10 (Colab free GPU)
+
+Results: [Release: Colab 10 Epochs](https://github.com/aun151214/YOLOv8-Object-Detection-Project-1/releases/tag/colab-10ep)
 
 Command used:
 
