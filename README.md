@@ -24,8 +24,6 @@ YOLOv8-Object-Detection-Project-1/
 │── requirements.txt
 │── .gitignore
 
-markdown
-Copy code
 
 ---
 
@@ -42,16 +40,18 @@ Everything is prepared with one command:
 
 ```bash
 python src/prepare_openimages.py
+
 🏋️ Training
+
 We trained the YOLOv8-nano model (yolov8n) for 50 epochs.
 The smaller model was chosen for speed since we trained on CPU/Colab.
 
 Command used:
 
-bash
-Copy code
-yolo detect train model=yolov8n.pt data=configs/data.yaml imgsz=320 epochs=50 batch=16 name=oi_yolov8n
+yolo detect train model=yolov8n.pt data=configs/data.yaml imgsz=320 epochs=50 batch=16 name=oi_yolov
+
 📈 Results
+
 Performance on validation set (200 images, 504 objects):
 
 Class	Precision	Recall	mAP50	mAP50-95
@@ -63,22 +63,22 @@ Overall	0.69	0.23	0.20	0.14
 
 Training curves:
 
-
 🔮 Inference
+
 Run inference on your own images:
 
-bash
-Copy code
 yolo detect predict model=runs/detect/oi_yolov8n/weights/best.pt source=samples/test_images/ save=True
+
 Predicted images are saved automatically under:
 
-bash
-Copy code
 runs/detect/predict/
+
+
 Example:
 If you put images in samples/test_images/, the results will appear in runs/detect/predict/.
 
 📦 Pretrained Weights & Outputs
+
 To avoid bloating the repo, we host model weights and results as a GitHub Release:
 
 🏋️ Best model weights: Download best.pt
@@ -86,26 +86,27 @@ To avoid bloating the repo, we host model weights and results as a GitHub Releas
 📉 Training curves: Download results.png
 
 ⚡ How to Reproduce
+
 Clone this repo:
 
-bash
-Copy code
 git clone https://github.com/aun151214/YOLOv8-Object-Detection-Project-1.git
 cd YOLOv8-Object-Detection-Project-1
+
+
 Create a virtual environment:
 
-bash
-Copy code
 python -m venv .venv
 .venv\Scripts\activate
+
+
 Install dependencies:
 
-bash
-Copy code
 pip install -r requirements.txt
+
+
 Prepare dataset:
 
-bash
-Copy code
 python src/prepare_openimages.py
+
+
 Train or run inference 🚀
