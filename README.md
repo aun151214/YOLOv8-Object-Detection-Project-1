@@ -112,3 +112,5 @@ python src/prepare_openimages.py
 
 
 Train or run inference 🚀
+
+✍️ Maintained by Aun Ali
