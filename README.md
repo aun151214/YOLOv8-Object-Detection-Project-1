@@ -81,9 +81,11 @@ If you put images in samples/test_images/, the results will appear in runs/detec
 
 To avoid bloating the repo, we host model weights and results as a GitHub Release:
 
-🏋️ Best model weights: Download best.pt
-
-📉 Training curves: Download results.png
+🏋️ Best model weights: Download best.pt and last.pt below
+[best.zip](https://github.com/user-attachments/files/22014412/best.zip)
+[last.zip](https://github.com/user-attachments/files/22014414/last.zip)
+📉 Training curves: Download results.png below
+[Results](https://github.com/user-attachments/assets/af93cfb5-92df-4e2c-b377-5d096a95aa51)
 
 ⚡ How to Reproduce
 
