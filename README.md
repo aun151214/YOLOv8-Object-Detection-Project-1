@@ -131,4 +131,43 @@ python src/prepare_openimages.py
 
 Train or run inference 🚀
 
+🔮 Future Work & Lessons Learned
+
+This project successfully demonstrated a full end-to-end pipeline for training YOLOv8 on a curated subset of OpenImages V6.
+However, there are many ways this work can be extended:
+
+✅ Lessons Learned
+
+Training large models on CPU is very slow → Colab GPU is a better option.
+
+Data preparation is just as important as training — fixing labels, cleaning splits, and exporting in YOLO format took significant effort.
+
+Small models (YOLOv8-nano) train fast but may struggle with rare classes (e.g., Bicycle, Motorcycle).
+
+🚀 Future Work
+
+Train Larger Models
+
+Run YOLOv8-s/m/l/x on Colab or Kaggle GPUs.
+
+Compare accuracy vs. training time.
+
+Hyperparameter Tuning
+
+Experiment with different learning rates, augmentations, and image sizes.
+
+Extend Dataset
+
+Add more OpenImages samples or move to a domain-specific dataset (e.g., industrial defect detection).
+
+Deployment
+
+Convert model to ONNX / TensorRT for faster inference.
+
+Deploy a demo app with Gradio or Streamlit.
+
+Hugging Face Demo (Optional)
+
+Host the model on Hugging Face Spaces so anyone can try it online without setup.
+
 ✍️ Maintained by Aun Ali
