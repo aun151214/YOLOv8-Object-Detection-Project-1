@@ -1,7 +1,7 @@
 # 🚀 YOLOv8 Object Detection Project (OpenImages Subset)
 
-This project demonstrates how to build an **end-to-end Object Detection pipeline with YOLOv8**, using a curated subset of the **OpenImages V6 dataset**.  
-The idea is to showcase real, practical deep learning work — dataset prep, training, evaluation, inference, and documentation — in a way that’s easy to reproduce.
+This project demonstrates how to build an end-to-end **Object Detection pipeline with YOLOv8**, using a curated subset of the **OpenImages V6** dataset.  
+We go from dataset preparation → training → evaluation → inference → documentation, in a fully reproducible way.
 
 ---
 
@@ -18,7 +18,12 @@ YOLOv8-Object-Detection-Project-1/
 │ └── prepare_openimages.py # Script to download & prepare dataset
 │
 │── samples/
-│ └── test_images/ # Custom images for inference
+│ └── predictions/ # Example predictions for README
+│ ├── 3.jpg
+│ └── 4.jpg
+│
+│── notebooks/
+│ └── yolov8_colab_train.ipynb # Google Colab notebook (10 epochs)
 │
 │── README.md
 │── requirements.txt
